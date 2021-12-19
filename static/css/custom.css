@@ -1,0 +1,82 @@
+/*
+Custom Css
+*/
+
+
+
+
+/* Spinner login/register */
+
+.loader {
+    margin: auto;
+    display: none;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #5cb85c;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+    /* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Single page auction */
+#bidAmount {
+    border: none;
+    border-bottom: 1px solid gray;
+    width: 5rem;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold !important;
+}
+
+
+/* List of auction items */
+.auction_product_listing:hover {
+    opacity: 0.5;
+}
+
+.auction_listing_images {
+    height: 200px;
+    width: auto;
+    max-width: 100% !important;
+    display: inline-block;
+    margin: auto;
+}
+
+.product_title_listing {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.listings_name_link{
+    font-style: italic !important;
+}
+
+.listing_price{
+    font-weight: bold !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

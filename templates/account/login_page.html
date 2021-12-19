@@ -1,0 +1,87 @@
+{% extends 'base/home_base.html' %}
+{% load static %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block site_content %}
+
+    <div class="container mb-lg-5">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-10 m-auto">
+                <h2 class="text-center mt-4">Login</h2>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-6 col-md-8 col-sm-10 m-auto">
+                <form id="login_form">
+                    {% csrf_token %}
+                    <div class="form-group mt-4">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username"
+                               required>
+                    </div>
+                    <div class="form-group mt-4">
+                        <input type="password" class="form-control" name="password" id="password"
+                               placeholder="Password"
+                               required>
+                    </div>
+                    <p class="mt-3">Don't have an account, <a href="{% url 'accountRegister' %}">sign up now</a></p>
+                    <p class="mt-3"><a href="#">Forgot the password</a></p>
+                    <button id="submit_button" type="submit" class="btn btn-success mb-4">Sign in</button>
+
+                    <small id="bad_info" style="display: none;" class="text-danger"><strong><br> Credentials you have
+                        provided are not valid, please try again
+                    </strong><br></small>
+
+
+                    <small id="login_error" style="display: none;" class="text-danger"><strong><br> Login failed, please
+                        try again</strong> <br></small>
+
+                    <div class="loader"></div>
+                    <p class="mb-lg-5">&nbsp;</p>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+    <script>
+        $("#login_form").submit(function (e) {
+            $("#submit_button").attr("disabled", true);
+            $(".loader").css("display", "block");
+            $("#bad_info").css("display", "none");
+            $("#login_error").css("display", "none");
+
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "loginView" %}',
+                data: {
+                    'username': $('#username').val(),
+                    'password': $('#password').val(),
+                    'csrfmiddlewaretoken': "{{ csrf_token }}"
+                },
+                success: function (data) {
+                    if (data == 'log') {
+                        $("#bad_info").css("display", "none");
+                        $("#login_error").css("display", "none");
+                        window.location.replace("{% url 'accountIndex' %}");
+                    } else if (data == "fail") {
+                        $("#bad_info").css("display", "block");
+                        $(".loader").css("display", "none");
+                        $("#submit_button").attr("disabled", false);
+
+                    } else {
+                        $("#login_error").css("display", "block");
+                        $(".loader").css("display", "none");
+                        $("#submit_button").attr("disabled", false);
+
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
