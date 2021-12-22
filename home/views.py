@@ -1,6 +1,8 @@
 from django.shortcuts import render, HttpResponse
+from django.utils import timezone
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'home/index.html')
+    a = timezone.now()
+    return render(request, 'home/index.html', context={"time": a})

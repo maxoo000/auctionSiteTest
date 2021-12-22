@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from home import views
+from auction.views import dnstest
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('auction/', include('auction.urls'), name='auction'),
     path('products/', include('products.urls'), name='products'),
     path('payment/', include('payment.urls'), name='payment'),
+    path('loaderio-e6e74a17eb7775e520cf348b517d3098/', dnstest, name='payment'),
 ]
